@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
-import { FirstRunPage } from '../pages';
+import { CardSearchPage } from '../pages/card-search/card-search';
 import { Settings } from '../providers';
 
 @Component({
@@ -27,11 +27,12 @@ import { Settings } from '../providers';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage = CardSearchPage;
 
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
+    { title: 'Card Searcher', component: 'CardSearchPage' },
     { title: 'Tutorial', component: 'TutorialPage' },
     { title: 'Welcome', component: 'WelcomePage' },
     { title: 'Tabs', component: 'TabsPage' },

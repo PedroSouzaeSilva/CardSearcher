@@ -1,5 +1,7 @@
 {
   "name": "MagicDeck",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
