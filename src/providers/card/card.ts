@@ -50,16 +50,20 @@ export class CardProvider {
     return results;
   }
 
+  private regexPrepare(string) {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+  };
+
   private checkCardName(card, name) {
     if(name == undefined) name = '';
-    return card.name.match(new RegExp(name, "i"));
+    return card.name.match(new RegExp(this.regexPrepare(name), "i"));
   }
 
   private checkCardText(card, text) {
     if(text == undefined) text = [];
     else text = text.split(' ');
     for(let sentence of text){
-      if(!card.text || !card.text.match(new RegExp(sentence, "i"))){
+      if(!card.text || !card.text.match(new RegExp(this.regexPrepare(sentence), "i"))){
         return false;
       }
     }
@@ -68,7 +72,7 @@ export class CardProvider {
 
   private checkCardType(card, type) {
     if(type == undefined) type = '';
-    return card.type.match(new RegExp(type, "i"));
+    return card.type.match(new RegExp(this.regexPrepare(type), "i"));
   }
 
   private checkCardColors(card, colors) {
