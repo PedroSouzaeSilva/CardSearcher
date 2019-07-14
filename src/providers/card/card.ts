@@ -50,7 +50,7 @@ export class CardProvider {
     return results;
   }
 
-  private regexPrepare(string) {
+  private regexPrepare(string) { // Prepara os caracteres especiais da string de input para produzir a regex
     return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
   };
 
