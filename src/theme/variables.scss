@@ -39,6 +39,10 @@ $colors: (
   colorless:  #666666,
 );
 
+.center-transform {
+  transform: translateX(-50%);
+  left: 50%;
+}
 
 // App iOS Variables
 // --------------------------------------------------

@@ -12,18 +12,30 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label position="floating">Card Name</ion-label>
-    <ion-input placeholder="Card Name"></ion-input>
+    <ion-label stacked>Name</ion-label>
+    <ion-input placeholder="Card Name"  [(ngModel)]="parameters.name"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Card Type</ion-label>
-    <ion-input placeholder="Card Type"></ion-input>
+    <ion-label stacked>Type</ion-label>
+    <ion-input placeholder="Card Type" [(ngModel)]="parameters.type"></ion-input>
   </ion-item>
 
-  <ion-item *ngFor="let color of colors">
-    <ion-checkbox color={{color}} id={{color}}>{{color | titlecase}}</ion-checkbox>
+  <ion-item>
+    <ion-label stacked>Text</ion-label>
+    <ion-input placeholder="Card Text" [(ngModel)]="parameters.text"></ion-input>
   </ion-item>
+
+  <ion-grid padding-left>
+    <ion-row>
+      <ion-col no-padding *ngFor="let color of colors">
+        <ion-item no-padding class = "checkbox-colors">
+          <ion-checkbox [(ngModel)]="color.value" color={{color.name}} id={{color.name}}></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button class="center-transform" ion-button color="primary" (click)="cardSearch(parameters)">Search</button>
     
-
 </ion-content>
