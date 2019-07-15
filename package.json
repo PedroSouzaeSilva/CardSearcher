@@ -22,12 +22,16 @@
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/camera": "4.3.3",
     "@ionic-native/core": "~4.20.0",
+    "@ionic-native/facebook": "^5.10.0",
     "@ionic-native/splash-screen": "~4.20.0",
     "@ionic-native/status-bar": "~4.20.0",
     "@ionic/storage": "^2.2.0",
     "@ngx-translate/core": "8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
+    "angularfire2": "^5.2.1",
+    "cordova-plugin-facebook4": "^5.0.0",
     "cordova-sqlite-storage": "^3.2.1",
+    "firebase": "^6.3.0",
     "ionic-angular": "3.9.5",
     "ionicons": "3.0.0",
     "mtgsdk": "^0.4.3",
@@ -42,7 +46,11 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-facebook4": {
+        "APP_ID": "2096156864026487",
+        "APP_NAME": "MagicCards"
+      }
     }
   }
 }

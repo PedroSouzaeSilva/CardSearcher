@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>797735942216-kpjv86vp7lus85f5d2ub5t8dg5b0vp7s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.797735942216-kpjv86vp7lus85f5d2ub5t8dg5b0vp7s</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCU7Dz6S0gnYmYKBJyWVXp9Jnv3MWh_CI0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>797735942216</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.ionic.magicDeck</string>
+	<key>PROJECT_ID</key>
+	<string>magiccards-db3dc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>magiccards-db3dc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:797735942216:ios:5896b2f3653bd234</string>
+	<key>DATABASE_URL</key>
+	<string>https://magiccards-db3dc.firebaseio.com</string>
+</dict>
+</plist>

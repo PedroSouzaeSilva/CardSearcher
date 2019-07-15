@@ -14,6 +14,18 @@ import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
 import { CardProvider } from '../providers/card/card';
 import { WelcomePageModule } from '../pages/welcome/welcome.module';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+var CREDENTIALS = {
+  apiKey: "AIzaSyDsnIx9xqO2OeO2uw95Kcb4tVlshA3WzBU",
+  authDomain: "magiccards-db3dc.firebaseapp.com",
+  databaseURL: "https://magiccards-db3dc.firebaseio.com",
+  projectId: "magiccards-db3dc",
+  storageBucket: "",
+  messagingSenderId: "797735942216",
+  appId: "1:797735942216:web:2ae8d0bc0cc609d3"
+};
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -44,6 +56,8 @@ export function provideSettings(storage: Storage) {
     BrowserModule,
     HttpClientModule,
     WelcomePageModule,
+    AngularFireModule.initializeApp(CREDENTIALS),
+    AngularFireAuthModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
