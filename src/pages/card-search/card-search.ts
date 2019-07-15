@@ -34,10 +34,18 @@ export class CardSearchPage {
       if(color.value) colorParameter.push(color.letter);
     }
     parameters.colors = colorParameter;
-    this.cardProvider.cardSearch(parameters);
+    this.openResults(
+      this.cardProvider.cardSearch(parameters)
+    );
   }
 
   ionViewDidLoad() {
     this.cardProvider.getMTGJson();
+  }
+
+  openResults(cards) {
+    this.navCtrl.push('ListMasterPage', {
+      cards: cards
+    });
   }
 }

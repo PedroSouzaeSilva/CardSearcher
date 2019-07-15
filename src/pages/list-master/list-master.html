@@ -4,8 +4,8 @@
     <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="add"></ion-icon>
+      <button ion-button icon-only (click)="toogleSearch = !toogleSearch">
+        <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -13,20 +13,19 @@
 </ion-header>
 
 <ion-content>
-
+  
+  <ion-searchbar [ngClass]="{fadeInDown: toogleSearch}" (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  
   <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
-          <img [src]="item.profilePic" />
-        </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+    <ion-item-sliding *ngFor="let card of currentItems">
+      <button ion-item (click)="openItem(card)">
+        <h2>{{card.name}}</h2>
+        <p>{{card.type}}</p>
+        <ion-note item-end *ngIf="card.manaCost">{{card.manaCost}}</ion-note>
       </button>
 
       <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
+        <button ion-button color="danger" (click)="deleteItem(card)">
           {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
@@ -10,16 +10,30 @@ import { Items } from '../../providers';
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
-  currentItems: Item[];
+  toogleSearch = false;
+  currentItems: Item[] = [];
+  mockImage = 'assets/img/appicon.png';
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public navParams: NavParams) {
+    this.items.items = navParams.get('cards');
   }
 
   /**
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+    this.currentItems = this.items.items;
+  }
+  
+  getItems(ev) {
+    let val = ev.target.value;
+    if (!val || !val.trim()) {
+      this.currentItems = this.items.items;
+      return;
+    }
+    this.currentItems = this.items.query({
+      name: val
+    });
   }
 
   /**

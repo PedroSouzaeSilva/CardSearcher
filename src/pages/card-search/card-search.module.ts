@@ -9,5 +9,8 @@ import { CardSearchPage } from './card-search';
   imports: [
     IonicPageModule.forChild(CardSearchPage),
   ],
+  exports: [
+    CardSearchPage,
+  ]
 })
 export class CardSearchPageModule {}

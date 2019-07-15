@@ -14,7 +14,6 @@ import 'rxjs/add/operator/map';
 export class CardProvider {
 
   constructor(public http: HttpClient, public storage: Storage) {
-    console.log('Hello CardProvider Provider');
   }
 
   getMTGJson() {
