@@ -14,7 +14,7 @@
 
 <ion-content>
   
-  <ion-searchbar [ngClass]="{fadeInDown: toogleSearch}" (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-searchbar class="animated fast" [ngClass]="{slideInDown: toogleSearch, slideOutUp: !toogleSearch, hidden:!toogleSearch }" (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
   
   <ion-list>
     <ion-item-sliding *ngFor="let card of currentItems">
