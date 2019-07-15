@@ -16,6 +16,7 @@ import { CardProvider } from '../providers/card/card';
 import { WelcomePageModule } from '../pages/welcome/welcome.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 var CREDENTIALS = {
   apiKey: "AIzaSyDsnIx9xqO2OeO2uw95Kcb4tVlshA3WzBU",
@@ -83,6 +84,7 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     CardProvider,
+    Facebook,
   ]
 })
 export class AppModule { }

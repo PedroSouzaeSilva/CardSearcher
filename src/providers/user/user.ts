@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 
 import { Api } from '../api/api';
 import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 
 /**
@@ -29,7 +31,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class User {
   _user: any;
 
-  constructor(public api: Api, private authenticator: AngularFireAuth) {
+  constructor(public api: Api, private authenticator: AngularFireAuth, private facebook: Facebook) {
 
   }
 
@@ -52,13 +54,15 @@ export class User {
 
   async login(accountInfo) {
     try {
-      var r = await this.authenticator.auth.signInWithEmailAndPassword(
+      let result = await this.authenticator.auth.signInWithEmailAndPassword(
         accountInfo.email,
         accountInfo.password
       );
-      if (r) {
+      if (result) {
         console.log("Successfully logged in!");
-        return true;
+        console.log(result);
+        this._user = result;
+        return result;
       }
 
     } catch (err) {
@@ -67,7 +71,38 @@ export class User {
     }
   }
 
+  async loginWithFacebook() {
+    try{
+      let result = await this.authenticator.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+      
+      /*    Login no Celular
+      let result = await this.facebook.login(['email']);
+      const fbCredential = firebase.auth.FacebookAuthProvider.credential(result.authResponse.accessToken);
+      await firebase.auth().signInWithCredential(fbCredential);
+      */
+
+     this._user = result;
+
+    }catch(err){
+      console.error(err);
+    }
+  }
+
   logout() {
     this.authenticator.auth.signOut();
   }
+
+  checkLoginState(){
+    this.authenticator.authState.subscribe((user: firebase.User) => {
+      if (user) {
+        console.log("The user is logged in!"); 
+        
+      }else
+      {
+        console.log("The user is not logged in!");
+      }
+      return;
+    });
+  }
+
 }
