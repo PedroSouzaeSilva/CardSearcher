@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CardProvider } from '../../providers/card/card';
 /**
  * Generated class for the CardSearchPage page.
@@ -25,27 +25,43 @@ export class CardSearchPage {
             {name: "green", letter: "G", value: false},
           ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public cardProvider: CardProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public cardProvider: CardProvider,
+              public loadingController: LoadingController) {
   }
 
-  cardSearch(parameters){
+  async cardSearch(parameters){
     let colorParameter = [];
     for(let color of this.colors) {
       if(color.value) colorParameter.push(color.letter);
     }
     parameters.colors = colorParameter;
-    this.openResults(
-      this.cardProvider.cardSearch(parameters)
-    );
+    let loading = await this.loadingController.create({
+      content: 'Searching Cards',
+      duration: 2000,
+    });
+    loading.present().then(()=>{
+      loading.onDidDismiss(()=>{
+        console.log('Loading dismissed!');
+      });
+  
+      this.cardProvider.cardSearch(parameters).then(results => {
+        this.openResults(results, loading);
+      },
+      err => { console.log(err) });
+    });
+  
   }
 
   ionViewDidLoad() {
     this.cardProvider.getMTGJson();
   }
 
-  openResults(cards) {
+  openResults(cards, loading) {
     this.navCtrl.push('ListMasterPage', {
-      cards: cards
+      cards: cards,
+      loader: loading,
     });
   }
 }

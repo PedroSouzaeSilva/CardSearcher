@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
@@ -12,17 +12,44 @@ import { Items } from '../../providers';
 export class ListMasterPage {
   toogleSearch = false;
   currentItems: Item[] = [];
-  mockImage = 'assets/img/appicon.png';
+  loader: any;
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public navParams: NavParams) {
-    this.items.items = navParams.get('cards');
+  constructor(public navCtrl: NavController,
+              public items: Items,
+              public modalCtrl: ModalController,
+              public navParams: NavParams,
+              public loadingController: LoadingController) {
+
+    this.items.items = this.navParams.get('cards');
+    this.currentItems = this.items.items;
+    this.loader = this.navParams.get('loader');
   }
-
+  
   /**
    * The view loaded, let's query our items for the list
    */
-  ionViewDidLoad() {
-    this.currentItems = this.items.items;
+  
+  ionViewDidEnter() {
+    if(this.loader){
+      console.log(this.loader);
+      console.log(this.currentItems);
+    }
+  }
+
+  ionViewDidLoad(){
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      content: 'Loading cards',
+      duration: 2000
+    });
+    await loading.present();
+
+    loading.onDidDismiss(()=>{
+      console.log('Loading dismissed!');
+    });
+
   }
   
   getItems(ev) {

@@ -28,7 +28,7 @@ export class CardProvider {
     }
   }
 
-  public cardSearch(parameters) {
+  public async cardSearch(parameters) {
     let results = [];
     console.log(parameters);
     this.storage.get('allCards').then(cards => {
@@ -80,5 +80,14 @@ export class CardProvider {
       if(!card.colorIdentity.includes(color)) return false;
     }
     return true;
+  }
+
+  public async getScryfallCard(card){
+    let parsedCardName = '';
+    for(let name of card.name.split(" ")){
+      if (parsedCardName) parsedCardName = parsedCardName + '+';
+      parsedCardName = parsedCardName + name;
+    }
+    return this.http.get(`https://api.scryfall.com/cards/named?exact=${parsedCardName}`,);
   }
 }
