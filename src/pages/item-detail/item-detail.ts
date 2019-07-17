@@ -26,14 +26,17 @@ export class ItemDetailPage {
     await this.cardProvider.getScryfallCard(this.item)
     .then((promise)=>{
       promise.subscribe(data => {
-        if (data.object == 'card') this.item.profilePic = data.image_uris.normal;
+        try{
+          this.scryFallCard = data;
+          if (this.scryFallCard.object != undefined && this.scryFallCard.object == 'card') this.item.profilePic = this.scryFallCard.image_uris.normal;
+        }
+        catch(err){
+          console.log(err);
+        }
       });
 
     })
   }
 
-  showCard(){
-    console.log(this.scryFallCard);
-  }
 
 }

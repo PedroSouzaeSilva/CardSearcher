@@ -42,4 +42,14 @@
     </ion-list>
   </form>
 
+  <ion-item no-padding class="set-btn-container" *ngIf="settingsReady && page == 'main'">
+    <ion-grid>
+      <ion-row>
+        <button class="center-transform btn-update" ion-button color="primary" (click)="forceCardUpdate()">Update Database</button>
+      </ion-row>
+      <ion-row margin-top>
+        <button class="center-transform btn-logout" ion-button color="danger" (click)="logout()">Logout</button>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
 </ion-content>

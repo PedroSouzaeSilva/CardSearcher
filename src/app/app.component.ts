@@ -19,7 +19,6 @@ export class MyApp {
     { title: 'Welcome', component: 'WelcomePage' },
     { title: 'Card Searcher', component: 'CardSearchPage' },
     { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
     { title: 'Login', component: 'LoginPage' },
     { title: 'Settings', component: 'SettingsPage' },
   ]

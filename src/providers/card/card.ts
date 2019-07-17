@@ -28,6 +28,13 @@ export class CardProvider {
     }
   }
 
+  async forceMTGJson(){
+    await this.http.get('https://mtgjson.com/json/AllCards.json').subscribe(data => {
+      this.storage.set('allCards', data).then(result => {
+      });
+    });
+  }
+
   public async cardSearch(parameters) {
     let results = [];
     console.log(parameters);

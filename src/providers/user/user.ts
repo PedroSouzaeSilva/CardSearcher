@@ -6,6 +6,8 @@ import { Api } from '../api/api';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 
 /**
@@ -31,7 +33,11 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 export class User {
   _user: any;
 
-  constructor(public api: Api, private authenticator: AngularFireAuth, private facebook: Facebook) {
+  constructor(public api: Api,
+    public alertController: AlertController,
+    private authenticator: AngularFireAuth,
+    private facebook: Facebook,
+    private storage: Storage) {
 
   }
 
@@ -59,9 +65,15 @@ export class User {
         accountInfo.password
       );
       if (result) {
-        console.log("Successfully logged in!");
-        console.log(result);
         this._user = result;
+        this.storage.set('user', this._user);
+        let alert = await this.alertController.create({
+          title: 'Login',
+          message: 'Login realizado com sucesso',
+          buttons: ['OK']
+        });
+    
+        await alert.present();
         return result;
       }
 
@@ -80,17 +92,33 @@ export class User {
       const fbCredential = firebase.auth.FacebookAuthProvider.credential(result.authResponse.accessToken);
       await firebase.auth().signInWithCredential(fbCredential);
       */
-
-     this._user = result;
-
+     if(result.user){
+       this._user = result;
+       this.storage.set('user', this._user);
+      let alert = await this.alertController.create({
+        title: 'Login',
+        message: 'Login realizado com sucesso',
+        buttons: ['OK']
+      });
+      await alert.present();
+     }
+     
     }catch(err){
       console.error(err);
     }
   }
 
-  logout() {
-    this.authenticator.auth.signOut();
+  async logout() {
+    await this.authenticator.auth.signOut();
+    this.storage.set('user', undefined);
+    let alert = await this.alertController.create({
+      title: 'Logout',
+      message: 'Logout realizado com sucesso',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
+  
 
   checkLoginState(){
     this.authenticator.authState.subscribe((user: firebase.User) => {

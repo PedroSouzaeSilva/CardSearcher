@@ -104,4 +104,5 @@
         <variable name="APP_ID" value="2096156864026487" />
         <variable name="APP_NAME" value="MagicCards" />
     </plugin>
+    <engine name="android" spec="7.0.0" />
 </widget>

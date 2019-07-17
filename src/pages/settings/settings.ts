@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Settings } from '../../providers';
+import { Settings, User } from '../../providers';
+import { CardProvider } from '../../providers/card/card';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -38,7 +39,9 @@ export class SettingsPage {
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    private user: User,
+    private cardSearch: CardProvider) {
   }
 
   _buildForm() {
@@ -91,5 +94,13 @@ export class SettingsPage {
 
   ngOnChanges() {
     console.log('Ng All Changes');
+  }
+
+  logout(){
+    this.user.logout();
+  }
+
+  forceCardUpdate(){
+    this.cardSearch.forceMTGJson();
   }
 }
