@@ -25,6 +25,16 @@
     <ion-label stacked>Text</ion-label>
     <ion-input placeholder="Card Text" [(ngModel)]="parameters.text"></ion-input>
   </ion-item>
+  
+  <ion-item>
+    <ion-label>Color</ion-label>
+    <ion-select [(ngModel)]="parameters.colorDef" value="exactColor">
+      <ion-option value="exactColor">Exact these colors</ion-option>
+      <ion-option value="mustColor">Must include these colors</ion-option>
+      <ion-option value="onlyColor">All cards with these colors</ion-option>
+      <ion-option value="colorIdentity">Color Identity</ion-option>
+    </ion-select>
+  </ion-item>
 
   <ion-grid padding-left>
     <ion-row>
