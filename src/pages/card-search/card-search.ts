@@ -42,10 +42,6 @@ export class CardSearchPage {
       duration: 2000,
     });
     loading.present().then(()=>{
-      loading.onDidDismiss(()=>{
-        console.log('Loading dismissed!');
-      });
-  
       this.cardProvider.cardSearch(parameters).then(results => {
         this.openResults(results, loading);
       },

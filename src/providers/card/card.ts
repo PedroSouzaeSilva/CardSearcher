@@ -46,13 +46,15 @@ export class CardProvider {
           this.checkCardName(aux, parameters.name) &&
           this.checkCardType(aux, parameters.type) &&
           this.checkCardText(aux, parameters.text) &&
-          this.checkCardColors(aux, parameters.colors)
+          this.checkCardColors(aux, parameters.colors, parameters.colorDef)
         ){
           results.push(aux);
+          if (aux.length >= 100) {
+            break;
+          }
         }
       }
     });
-    console.log(results);
     return results;
   }
 
@@ -81,10 +83,25 @@ export class CardProvider {
     return card.type.match(new RegExp(this.regexPrepare(type), "i"));
   }
 
-  private checkCardColors(card, colors) {
-    for(let color of colors){
-      if(!card.colorIdentity) console.log(card.colorIdentity);
-      if(!card.colorIdentity.includes(color)) return false;
+  private checkCardColors(card, selectedColors, colorDef) {
+    if(colorDef == "exactColor"){
+      if(selectedColors.length != card.colors.length) return false;
+      if(!selectedColors.every(color => card.colors.includes(color))) return false;
+    }
+    else if(colorDef == "mustColor"){
+      for(let color of selectedColors){
+        if(!card.colors.includes(color)) return false;
+      }
+    }
+    else if(colorDef == "onlyColor"){
+      for(let color of card.colors){
+        if(!selectedColors.includes(color)) return false;
+      }
+    }
+    else if(colorDef == "colorIdentity"){
+      for(let color of selectedColors){
+        if(!card.colorIdentity.includes(color)) return false;
+      }
     }
     return true;
   }
